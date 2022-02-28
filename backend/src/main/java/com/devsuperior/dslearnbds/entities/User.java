@@ -30,7 +30,7 @@ public class User implements Serializable {
 	private String email;
 	private String password;
 	
-	@OneToMany(mappedBy = "notification")
+	@OneToMany(mappedBy = "user")
 	private List<Notification> notifications = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.EAGER)
