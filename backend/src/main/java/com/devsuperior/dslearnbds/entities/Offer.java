@@ -16,12 +16,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="tb_offer")
-public class Offer  implements Serializable {
+@Table(name = "tb_offer")
+public class Offer implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -32,11 +31,14 @@ public class Offer  implements Serializable {
 	private Instant endMoment;
 
 	@ManyToOne
-	@JoinColumn(name="course_id")
+	@JoinColumn(name = "course_id")
 	private Course course;
-	
+
 	@OneToMany(mappedBy = "offer")
 	private List<Resource> resources = new ArrayList<>();
+
+	@OneToMany(mappedBy = "offer")
+	private List<Topic> topics = new ArrayList<>();
 
 	public Offer() {
 
@@ -89,9 +91,13 @@ public class Offer  implements Serializable {
 	public void setCourse(Course course) {
 		this.course = course;
 	}
-	
+
 	public List<Resource> getResources() {
 		return resources;
+	}
+
+	public List<Topic> getTopics() {
+		return topics;
 	}
 
 	@Override
@@ -110,7 +116,5 @@ public class Offer  implements Serializable {
 		Offer other = (Offer) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
 
 }
